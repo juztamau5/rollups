@@ -30,6 +30,7 @@ interface Args extends BlockchainArgs {
     feeManagerOwner?: string;
     validators: string;
     outputFile?: string;
+    jsonFile?: string;
 }
 
 export const command = "create";
@@ -118,11 +119,22 @@ export const builder = (yargs: Argv<{}>): Argv<Args> => {
             describe: "Output file to write application address",
             type: "string",
         })
+        .option("jsonFile", {
+            describe: "Output file to write application address in JSON format",
+            type: "string",
+        })
         .config();
 };
 
 export const handler = safeHandler<Args>(async (args) => {
-    const { deploymentFile, mnemonic, accountIndex, rpc, outputFile } = args;
+    const {
+        deploymentFile,
+        mnemonic,
+        accountIndex,
+        rpc,
+        outputFile,
+        jsonFile,
+    } = args;
 
     // connect to provider, use deployment address based on returned chain id of provider
     console.log(`connecting to ${rpc}`);
@@ -177,6 +189,13 @@ export const handler = safeHandler<Args>(async (args) => {
         if (outputFile) {
             console.log(`writing application address to ${outputFile}`);
             fse.outputFileSync(outputFile, application);
+        }
+        if (jsonFile) {
+            console.log(`writing application address to ${jsonFile}`);
+            fse.outputFileSync(
+                jsonFile,
+                JSON.stringify({ address: application })
+            );
         }
     }
 });
