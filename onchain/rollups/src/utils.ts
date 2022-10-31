@@ -62,6 +62,7 @@ export const productionFacetNames: string[] = [
     "EtherPortalFacet",
     "FeeManagerFacet",
     "InputFacet",
+    "IPFSFacet",
     "OutputFacet",
     "RollupsFacet",
     "ValidatorManagerFacet",

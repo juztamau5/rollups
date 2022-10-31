@@ -21,6 +21,7 @@ contract!(erc721_portal_facet);
 contract!(ether_portal_facet);
 contract!(fee_manager_facet);
 contract!(input_facet);
+contract!(ipfs_facet);
 contract!(output_facet);
 contract!(rollups_facet);
 contract!(validator_manager_facet);

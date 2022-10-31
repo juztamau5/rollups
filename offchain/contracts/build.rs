@@ -57,6 +57,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ),
         ("Bank", "Bank", "bank_contract.rs"),
         ("ERC20", "ERC20", "erc20_contract.rs"),
+        (
+            "IPFSFacet",
+            "facets/IPFSFacet",
+            "ipfs_facet.rs",
+        ),
     ];
 
     for (contract_name, file, bindings_file_name) in contracts {

@@ -31,6 +31,7 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     await deployments.deploy("EtherPortalFacet", opts);
     await deployments.deploy("FeeManagerFacet", opts);
     await deployments.deploy("InputFacet", opts);
+    await deployments.deploy("IPFSFacet", opts);
     await deployments.deploy("OutputFacet", {
         ...opts,
         libraries: {
