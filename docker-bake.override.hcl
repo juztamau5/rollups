@@ -1,10 +1,10 @@
 
 variable "TAG" {
-  default = "devel"
+  default = "0.8.2"
 }
 
 variable "DOCKER_ORGANIZATION" {
-  default = "cartesi"
+  default = "juztamau5"
 }
 
 target "state-server" {
