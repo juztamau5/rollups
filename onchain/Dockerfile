@@ -1,5 +1,5 @@
 # syntax=docker.io/docker/dockerfile:1.4
-FROM node:16.17.0-alpine3.15 as base
+FROM node:18.14.0-alpine3.16 as base
 
 # this stage installs system dependencies for building the node projects
 FROM base as builder
