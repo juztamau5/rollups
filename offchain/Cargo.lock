@@ -635,7 +635,6 @@ dependencies = [
 name = "block-history"
 version = "0.6.0"
 source = "registry+https://github.com/cartesi/crates-index"
-checksum = "0ecd5d6f79de6456d0062492090c14a2d47fe4ad46a1fe3ffe3c533294a55079"
 dependencies = [
  "async-stream",
  "snafu 0.7.3",
@@ -4486,7 +4485,6 @@ dependencies = [
 name = "state-fold"
 version = "0.6.0"
 source = "registry+https://github.com/cartesi/crates-index"
-checksum = "e7052276b382b03cbea29f681b26ea9070cdb5527578e6b030ce25001e1e96b1"
 dependencies = [
  "async-recursion 1.0.0",
  "async-trait",
@@ -4519,7 +4517,6 @@ dependencies = [
 name = "state-fold-types"
 version = "0.6.0"
 source = "registry+https://github.com/cartesi/crates-index"
-checksum = "02b16fab910b07755d08804a5096a3a3281c09c6e93a094dd00d19054361b2ba"
 dependencies = [
  "anyhow",
  "ethabi",
