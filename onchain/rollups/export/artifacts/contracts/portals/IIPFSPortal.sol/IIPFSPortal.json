@@ -1,0 +1,84 @@
+{
+  "contractName": "IIPFSPortal",
+  "sourceName": "contracts/portals/IIPFSPortal.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getInputBox",
+      "outputs": [
+        {
+          "internalType": "contract IInputBox",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_dapp",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_execLayerData",
+          "type": "bytes"
+        }
+      ],
+      "name": "transferIPFS",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "getInputBox()": {
+        "returns": {
+          "_0": "The input box"
+        }
+      },
+      "transferIPFS(address,bytes,bytes)": {
+        "params": {
+          "_dapp": "The address of the DApp",
+          "_data": "The IPFS data to be transferred",
+          "_execLayerData": "Additional data to be interpreted by the execution layer"
+        }
+      }
+    },
+    "title": "IPFS Portal interface",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getInputBox()": {
+        "notice": "Get the input box used by this portal."
+      },
+      "transferIPFS(address,bytes,bytes)": {
+        "notice": "Transfer IPFS data to a DApp and add an input to the DApp's input box to signal such operation."
+      }
+    },
+    "version": 1
+  },
+  "evm": {
+    "gasEstimates": null,
+    "methodIdentifiers": {
+      "getInputBox()": "00aace9a",
+      "transferIPFS(address,bytes,bytes)": "b54f4804"
+    }
+  }
+}
