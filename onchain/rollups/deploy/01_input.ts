@@ -52,6 +52,10 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
         ...opts,
         args: [InputBox.address],
     });
+    await deployments.deploy("IPFSPortal", {
+        ...opts,
+        args: [InputBox.address],
+    });
 };
 
 export default func;

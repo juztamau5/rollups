@@ -158,4 +158,21 @@ library InputEncoding {
                 dapp //                     20B
             );
     }
+
+    /// @notice Encode an IPFS data transfer.
+    /// @param ipfsData The IPFS data being sent
+    /// @param execLayerData Additional data to be interpreted by the execution layer
+    /// @return The encoded input
+    function encodeIPFSTransfer(
+        address sender,
+        bytes calldata ipfsData,
+        bytes calldata execLayerData
+    ) internal pure returns (bytes memory) {
+        bytes memory data = abi.encode(ipfsData, execLayerData);
+        return
+            abi.encodePacked(
+                sender, //              20B
+                data //                arbitrary size
+            );
+    }
 }
