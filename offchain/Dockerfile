@@ -19,10 +19,8 @@ RUN cargo chef prepare --recipe-path recipe.json
 # cargo chef cook stage
 FROM chef AS builder
 
-RUN <<EOF
-DEBIAN_FRONTEND="noninteractive" apt-get update
-DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends cmake libprotobuf-dev protobuf-compiler
-EOF
+RUN DEBIAN_FRONTEND="noninteractive" apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends cmake libprotobuf-dev protobuf-compiler
 
 WORKDIR /usr/src/app/offchain
 COPY --from=planner /usr/src/app/offchain/recipe.json recipe.json
@@ -44,42 +42,34 @@ ENV PATH="/opt/cartesi/bin:${PATH}"
 
 ## runtimes
 FROM runtime AS state_server
-RUN <<EOF
-apt-get update
-DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends ca-certificates
-rm -rf /var/lib/apt/lists/*
-EOF
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/src/app/offchain/target/release/cartesi-rollups-state-server /opt/cartesi/bin/cartesi-rollups-state-server
 USER cartesi
 ENTRYPOINT ["/opt/cartesi/bin/cartesi-rollups-state-server"]
 
 FROM runtime AS indexer
-RUN <<EOF
-apt-get update
-DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends libpq5 ca-certificates
-rm -rf /var/lib/apt/lists/*
-EOF
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends libpq5 ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/src/app/offchain/target/release/cartesi-rollups-indexer /opt/cartesi/bin/cartesi-rollups-indexer
 USER cartesi
 ENTRYPOINT ["/opt/cartesi/bin/cartesi-rollups-indexer"]
 
 FROM runtime AS dispatcher
-RUN <<EOF
-apt-get update
-DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends ca-certificates
-rm -rf /var/lib/apt/lists/*
-EOF
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/src/app/offchain/target/release/cartesi-rollups-dispatcher /opt/cartesi/bin/cartesi-rollups-dispatcher
 COPY onchain/rollups/export/abi /opt/cartesi/share/deployments/
 USER cartesi
 ENTRYPOINT ["/opt/cartesi/bin/cartesi-rollups-dispatcher"]
 
 FROM runtime AS advance_runner
-RUN <<EOF
-apt-get update
-DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends ca-certificates curl
-rm -rf /var/lib/apt/lists/*
-EOF
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends ca-certificates curl && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/src/app/offchain/target/release/cartesi-rollups-advance-runner /opt/cartesi/bin/cartesi-rollups-advance-runner
 USER cartesi
 ENTRYPOINT ["/opt/cartesi/bin/cartesi-rollups-advance-runner"]
@@ -90,11 +80,9 @@ USER cartesi
 ENTRYPOINT ["/opt/cartesi/bin/cartesi-rollups-inspect-server"]
 
 FROM runtime AS graphql_server
-RUN <<EOF
-apt-get update
-DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends libpq5
-rm -rf /var/lib/apt/lists/*
-EOF
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends libpq5 && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/src/app/offchain/target/release/cartesi-rollups-graphql-server /opt/cartesi/bin/cartesi-rollups-graphql-server
 USER cartesi
 ENTRYPOINT ["/opt/cartesi/bin/cartesi-rollups-graphql-server"]
